@@ -1,113 +1,57 @@
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import "../styles/globals.css";
+import { Button } from "@/components/ui/button";
+import { CiSearch } from "react-icons/ci";
+import Genres from "@/components/custom/genres";
+import { ReloadCTX } from "@/contexts/reload";
+import { useEffect, useState } from "react";
+import NowInCinema from "@/components/custom/nowInCinemaMovies";
+import PopularMovies from "@/components/custom/popularMovies";
 
 export default function Home() {
+  const [reload, setReload] = useState(false);
+  const [selectedBack, setSelectedBack] = useState(null)
+
+  useEffect(() => {
+    const bacdropPath = localStorage.getItem("movieBackdropPath");
+    setSelectedBack(bacdropPath)
+  }, [])
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <ReloadCTX.Provider value={[reload, setReload]}>
+      <div className={selectedBack ? `bg-[url(${process.env.NEXT_PUBLIC_BASE_IMG_URL + selectedBack})]` : "backdrop"}></div>
+      <div className="container">
+        <div className="flex justify-between items-center h-[80px] mb-[50px]">
+          <Image src="/images/logo.png" alt="logo" width={130} height={30} />
+          <nav className="flex gap-[30px]">
+            <a href="#">Афиша</a>
+            <a href="#">Медиа</a>
+            <a href="#">Фильмы</a>
+            <a href="#">Актёры</a>
+            <a href="#">Новости</a>
+            <a href="#">Подборки</a>
+            <a href="#">Категории</a>
+          </nav>
+          <div className="flex items-center gap-[12px]">
+            <Button className="w-[50px] h-[50px] rounded-[10px] bg-white">
+              <CiSearch color="rgba(54, 87, 203, 1)" size={15} />
+            </Button>
+            <Button className="w-[138px] h-[50px] rounded-[10px] bg-[rgba(54,87,203,1)] shadow-[0px_0px_15px_0px_rgba(72,113,255,0.8)]">
+              Войти
+            </Button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div>
+          <div className="flex items-center gap-[90px] mb-[50px]">
+            <h1 className="font-[900] text-[65px] text-white">Сейчас в кино</h1>
+            <div className="w-[50px] h-[2px] bg-white"></div>
+            <Genres />
+          </div>
+          <NowInCinema />
+          <PopularMovies />
+        </div>
+      </div>
+    </ReloadCTX.Provider>
   );
 }

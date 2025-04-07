@@ -22,6 +22,7 @@ function NowInCinema() {
     });
     const [reload] = useContext(ReloadCTX);
     const [showAll, setShowAll] = useState(false);
+    const [showBackdrop, setShowBackdrop] = useState<string | null>(null);
 
     useEffect(() => {
         const getTMDBApi = async () => {
@@ -48,9 +49,6 @@ function NowInCinema() {
                 const moviesData = await moviesRes.json();
                 const genresData = await genresRes.json();
 
-                console.log(moviesData.results);
-
-
                 dispatch({ type: "setMovies", payload: moviesData.results });
                 dispatch({ type: "setGenres", payload: genresData.genres });
             } catch (error) {
@@ -59,6 +57,15 @@ function NowInCinema() {
         };
 
         getTMDBApi();
+    }, [reload]);
+
+    useEffect(() => {
+        const backdropPath = localStorage.getItem("movieBackdropPath");
+        if (backdropPath) {
+            setShowBackdrop(`${process.env.NEXT_PUBLIC_BASE_IMG_URL}${backdropPath}`);
+        } else {
+            setShowBackdrop(null);
+        }
     }, [reload]);
 
     const getGenreNames = (ids: number[]) => {
@@ -72,6 +79,8 @@ function NowInCinema() {
 
     return (
         <>
+            <div className={`backdrop ${showBackdrop ? 'bg-cover' : ''}`} style={showBackdrop ? { backgroundImage: `url(${showBackdrop})` } : {}}>
+            </div>
             <div className="grid grid-cols-4 gap-[22px] justify-center">
                 {moviesToShow.map((movie: any, index: number) => (
                     <div key={movie.id} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -83,6 +92,7 @@ function NowInCinema() {
                             className="rounded-[10px] mb-[12px] cursor-pointer hover:shadow-[0px_0px_15px_0px_rgba(72,113,255,0.8)] hover:ease-in hover:transition-all duration-100"
                             onMouseEnter={() => {
                                 localStorage.setItem('movieBackdropPath', movie.backdrop_path);
+                                setShowBackdrop(`${process.env.NEXT_PUBLIC_BASE_IMG_URL}${movie.backdrop_path}`);
                             }}
                         />
                         <div>

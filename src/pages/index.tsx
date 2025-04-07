@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <ReloadCTX.Provider value={[reload, setReload]}>
       <BackdropCTX.Provider value={{ showBackdrop, setShowBackdrop }}>
-        <div className={`backdrop ${showBackdrop ? 'bg-cover' : ''}`} style={showBackdrop ? { backgroundImage: `url(${showBackdrop})` } : {}}>
+        <div className={`${showBackdrop ? 'bg-cover' : ''}`} style={showBackdrop ? { backgroundImage: `url(${showBackdrop})` } : {}}>
         </div>
         <div className="container">
           <div className="flex justify-between items-center h-[80px] mb-[50px]">

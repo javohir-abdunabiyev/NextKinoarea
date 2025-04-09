@@ -8,6 +8,9 @@ import { useState, useEffect } from "react";
 import NowInCinema from "@/components/custom/nowInCinemaMovies";
 import PopularMovies from "@/components/custom/popularMovies";
 import { BackdropCTX } from "@/contexts/backdrop";
+import Persons from "@/components/custom/persons";
+import UpComing from "@/components/custom/upcoming";
+import Footer from "@/components/custom/footer";
 
 export default function Home() {
   const [reload, setReload] = useState(false);
@@ -57,6 +60,9 @@ export default function Home() {
             </div>
             <NowInCinema />
             <PopularMovies />
+            <Persons />
+            <UpComing />
+            <Footer />
           </div>
         </div>
       </BackdropCTX.Provider>

@@ -2,7 +2,7 @@ import { ReloadCTX } from "@/contexts/reload";
 import { useContext, useEffect, useReducer } from "react";
 import "./noscrollbar.css"
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
     switch (action.type) {
         case "get":
             return action.payload || [];
@@ -37,7 +37,7 @@ function Genres() {
         <>
             <div className="flex items-center max-w-[560px] w-full overflow-x-auto no-scrollbar gap-[30px]">
                 <p className="cursor-pointer">Все</p>
-                {state.map((genre) => {
+                {state.map((genre: any) => {
                     return (
                         <div key={genre.id}>
                             <p className="cursor-pointer">{genre.name}</p>

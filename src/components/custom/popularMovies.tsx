@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useReducer, useState } from "react";
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
     switch (action.type) {
         case "setMovies":
             return { ...state, movies: action.payload };

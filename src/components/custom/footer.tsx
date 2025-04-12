@@ -5,11 +5,12 @@ import { Label } from '../ui/label';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
+
 function Footer() {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: any) => {
         const mail = `+ Новый подписчик \n Почта: ${data.email}`;
 
         axios.post(`https://api.telegram.org/bot7403629476:AAHFWErr6gveumC9BwS2B7kQlQv4vJWCYsU/sendMessage`, {
@@ -35,14 +36,17 @@ function Footer() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='flex gap-[8px] items-center justify-center'>
                         <Input className='w-[425px] h-[70px] bg-white' placeholder='Введите свой E-mail адрес' type='email' {...register("email", { required: "Email обязателен" })} />
-                        <Button className='w-[180px] h-[70px] bg-[rgba(242,246,15,1)] text-black text-[17px] font-[700] hover:bg-[]'>Подписаться</Button>
+                        <Button type='submit' className='w-[180px] h-[70px] bg-[rgba(242,246,15,1)] text-black text-[17px] font-[700] hover:bg-[]'>Подписаться</Button>
                     </div>
-                    {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
-                    <div className='flex gap-[10px] items-center justify-center mt-[20px] w-full'>
+                    {errors.email && typeof errors.email.message === 'string' && (
+                        <p className="text-red-500 mt-2">{errors.email.message}</p>
+                    )}                    <div className='flex gap-[10px] items-center justify-center mt-[20px] w-full'>
                         <Input type='checkbox' id='accept' className='w-[17px] h-[17px]' {...register("checkbox", { required: "Надо согласиться" })} />
                         <Label htmlFor='accept' className='w-full'>Соглашаюсь на условия политики конфиденциальности</Label>
                     </div>
-                    {errors.checkbox && <p style={{ color: "red" }}>{errors.checkbox.message}</p>}
+                    {errors.checkbox && typeof errors.checkbox.message === 'string' && (
+                        <p className="text-red-500 mt-2">{errors.checkbox.message}</p>
+                    )}
                 </form>
             </div>
 

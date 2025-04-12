@@ -10,7 +10,7 @@ type NewTrailersProps = {
 
 function NewTrailers({ movies }: NewTrailersProps) {
     const [trailers, setTrailers] = useState<{ [key: number]: string }>({});
-    const [selectedMovie, setSelectedMovie] = useState(null)
+    const [selectedMovie, setSelectedMovie] = useState<any>(null)
     const [activeMovie, setActiveMovie] = useState(null)
 
     useEffect(() => {

@@ -1,0 +1,31 @@
+.backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    background: url("/images/mainBack.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.5;
+    z-index: -1;
+    transition: .5s ease;
+}
+
+
+.backdrop::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(211, 156, 85, 0) 0%, rgba(30, 37, 56, 1) 90%);
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}

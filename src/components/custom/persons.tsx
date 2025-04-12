@@ -2,7 +2,7 @@ import { ReloadCTX } from "@/contexts/reload";
 import Image from "next/image";
 import { useContext, useEffect, useReducer, useState } from "react";
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
     switch (action.type) {
         case "get":
             return action.payload;
@@ -77,7 +77,7 @@ function Persons() {
                     </div>
                     <div className="p-[30px] !pt-[20px] bg-[rgba(27,33,51,1)] max-w-[500px] w-full max-h-[400px] h-full overflow-y-scroll no-scrollbar rounded-[10px]">
                         {
-                            state.map((person) => (
+                            state.map((person: any) => (
                                 <div key={person.id} className="flex justify-between items-center border-b-[1px] border-b-[rgba(255,255,255,0.1)] py-[10px]">
                                     <div>
                                         <h3 className="text-[20px] font-[700]">{person.name}</h3>

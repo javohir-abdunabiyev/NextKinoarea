@@ -1,10 +1,9 @@
 import { ReloadCTX } from "@/contexts/reload";
 import Image from "next/image";
+import Link from "next/link";
 import { useContext, useEffect, useReducer, useState } from "react";
-import { Button } from "../ui/button";
-import NewTrailers from "./newTrailers";
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
     switch (action.type) {
         case "setMovies":
             return { ...state, movies: action.payload };
@@ -21,7 +20,6 @@ function UpComing() {
         genres: [],
     });
     const [reload] = useContext(ReloadCTX);
-    const [showAll, setShowAll] = useState(false);
 
     useEffect(() => {
         const getTMDBApi = async () => {
@@ -70,21 +68,23 @@ function UpComing() {
             <h1 className="text-[40px] font-[900] text-white mb-[70px]">Ожидаемые новинки</h1>
             <div className="grid grid-cols-4 gap-[22px] justify-center">
                 {state.movies.slice(0, 4).map((movie: any, index: number) => (
-                    <div key={movie.id} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                        <Image
-                            src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${movie.poster_path}`}
-                            alt="movie"
-                            width={300}
-                            height={400}
-                            className="rounded-[10px] mb-[12px] cursor-pointer hover:shadow-[0px_0px_15px_0px_rgba(72,113,255,0.8)] hover:ease-in hover:transition-all duration-100"
-                        />
-                        <div>
-                            <p className="font-bold text-[18px]">{movie.title}</p>
-                            <p className="text-[rgba(242,246,15,1)] text-[15px]">
-                                {getGenreNames(movie.genre_ids)}
-                            </p>
+                    <Link href={"/movie/" + movie.id}>
+                        <div key={movie.id} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                            <Image
+                                src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${movie.poster_path}`}
+                                alt="movie"
+                                width={300}
+                                height={400}
+                                className="rounded-[10px] mb-[12px] cursor-pointer hover:shadow-[0px_0px_15px_0px_rgba(72,113,255,0.8)] hover:ease-in hover:transition-all duration-100"
+                            />
+                            <div>
+                                <p className="font-bold text-[18px]">{movie.title}</p>
+                                <p className="text-[rgba(242,246,15,1)] text-[15px]">
+                                    {getGenreNames(movie.genre_ids)}
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
 
             </div>

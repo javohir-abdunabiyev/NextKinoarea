@@ -21,7 +21,7 @@ const reducer = (state: any, action: any) => {
     }
 };
 
-function MovieActors({ id }: { id: any }) {
+function MovieActors({ id }: { id: unknown }) {
     const [state, dispatch] = useReducer(reducer, { cast: [], videos: [], trailerKey: null }); const [reload] = useContext(ReloadCTX) || [];
     const [showAll, setShowAll] = useState(false);
 

@@ -5,12 +5,15 @@ import { Label } from '../ui/label';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
+interface data {
+    data: ""
+}
 
 function Footer() {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: data) => {
         const mail = `+ Новый подписчик \n Почта: ${data.email}`;
 
         axios.post(`https://api.telegram.org/bot7403629476:AAHFWErr6gveumC9BwS2B7kQlQv4vJWCYsU/sendMessage`, {

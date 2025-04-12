@@ -1,7 +1,3 @@
-import Image from "next/image";
-import "../styles/globals.css";
-import { Button } from "@/components/ui/button";
-import { CiSearch } from "react-icons/ci";
 import Genres from "@/components/custom/genres";
 import { ReloadCTX } from "@/contexts/reload";
 import { useState, useEffect } from "react";

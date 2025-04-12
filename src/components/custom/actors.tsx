@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useContext, useEffect, useReducer, useState } from "react";
 import { Button } from "../ui/button";
 
+
 const reducer = (state: any, action: any) => {
     switch (action.type) {
         case "get_credits":

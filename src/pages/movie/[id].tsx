@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import MovieActors from "@/components/custom/actors";
 import Footer from "@/components/custom/footer";
 
-
 const reducer = (state: any, action: any) => {
     switch (action.type) {
         case "setMovie":
@@ -96,25 +95,29 @@ function Movie() {
                         <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Год:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{state.movie.release_date}</p></div>
                         <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Страна:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{state.movie.origin_country}</p></div>
                         <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Слоган:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{state.movie.tagline}</p></div>
-                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Режиссер</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">""</p></div>
-                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Сценарий:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">""</p></div>
-                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Продюсер:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">""</p></div>
-                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Оператор:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">""</p></div>
-                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Композитор:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">""</p></div>
+                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Режиссер</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{""}</p></div>
+                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Сценарий:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{""}</p></div>
+                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Продюсер:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{""}</p></div>
+                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Оператор:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{""}</p></div>
+                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Композитор:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{""}</p></div>
                     </div>
                     <div>
-                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Художник:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">""</p></div>
-                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Монтаж:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">""</p></div>
+                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Художник:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{""}</p></div>
+                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Монтаж:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{""}</p></div>
                         <div className="flex max-w-[700px] w-full justify-between">
                             <p className="text-[18px] font-[600] max-w-[200px] w-full">Жанры:</p>
                             <p className="max-w-[350px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">
-                                {state.movie.genres?.map((genre: any) => genre.name).join(", ")}
-                            </p>
+                                {state.movie.genres?.map((genre: any, index: number) => (
+                                    <span key={index}>
+                                        {genre.name}
+                                        {index < state.movie.genres.length - 1 && ", "}
+                                    </span>
+                                ))}                            </p>
                         </div>
                         <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Сборы в мире:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">${state.movie.budget}</p></div>
                         <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Премьера (мир):</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{state.movie.release_date}</p></div>
                         <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Премьера (РФ):</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{state.movie.release_date}</p></div>
-                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Возраст:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">""</p></div>
+                        <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Возраст:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{""}</p></div>
                         <div className="flex max-w-[700px] w-full justify-between"><p className="text-[18px] font-[600] max-w-[200px] w-full">Время:</p><p className="max-w-[450px] w-full text-left font-[400] text-[rgba(242,246,15,1)]">{state.movie.runtime} мин.</p></div>
                     </div>
                 </div>

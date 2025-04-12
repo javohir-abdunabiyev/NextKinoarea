@@ -69,7 +69,7 @@ function UpComing() {
             <div className="grid grid-cols-4 gap-[22px] justify-center">
                 {state.movies.slice(0, 4).map((movie: any, index: number) => (
                     <Link href={"/movie/" + movie.id}>
-                        <div key={movie.id} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                        <div key={index} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                             <Image
                                 src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${movie.poster_path}`}
                                 alt="movie"

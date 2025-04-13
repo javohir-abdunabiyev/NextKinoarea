@@ -2,6 +2,7 @@ import { ReloadCTX } from "@/contexts/reload";
 import Image from "next/image";
 import { useContext, useEffect, useReducer, useState } from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 
 const reducer = (state: any, action: any) => {
@@ -23,7 +24,8 @@ const reducer = (state: any, action: any) => {
 };
 
 function MovieActors({ id }: { id: unknown }) {
-    const [state, dispatch] = useReducer(reducer, { cast: [], videos: [], trailerKey: null }); const [reload] = useContext(ReloadCTX) || [];
+    const [state, dispatch] = useReducer(reducer, { cast: [], videos: [], trailerKey: null });
+    const [reload] = useContext(ReloadCTX) || [];
     const [showAll, setShowAll] = useState(false);
 
     useEffect(() => {
@@ -69,14 +71,25 @@ function MovieActors({ id }: { id: unknown }) {
                 {
                     actorsToShow.map((actor: any) => (
                         <div key={actor.id} className="">
-                            <Image
-                                src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${actor.profile_path}`}
-                                alt="actor"
-                                width={250}
-                                height={250}
-                                draggable={false}
-                                className="w-[250px] h-[250px] object-cover"
-                            />
+                            {actor.profile_path ? (
+                                <Link href={"/actor/" + actor.id}>
+                                    <Image
+                                        src={process.env.NEXT_PUBLIC_BASE_IMG_URL + actor.profile_path}
+                                        alt="actor"
+                                        width={250}
+                                        height={250}
+                                        draggable={false}
+                                        className="w-[250px] h-[250px] object-cover rounded-[5px]"
+                                    />
+                                </Link>
+                            ) : (
+                                <Link href={"/actor/" + actor.id}>
+                                    <div className="w-[250px] h-[250px] bg-gray-700 flex items-center justify-center rounded-[5px] text-white">
+                                        Нет фото
+                                    </div>
+                                </Link>
+                            )}
+
                             <h3 className="font-[700] text-[18px]">{actor.name}</h3>
                             <p className="font-[400] text-[16px] text-[rgba(242,246,15,1)]">{actor.character}</p>
                         </div>

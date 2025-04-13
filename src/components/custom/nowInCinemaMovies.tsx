@@ -84,7 +84,7 @@ function NowInCinema() {
             </div>
             <div className="grid grid-cols-4 gap-[22px] justify-center">
                 {moviesToShow.map((movie: any, index: number) => (
-                    <Link href={"/movie/" + movie.id}>
+                    <Link href={"/movie/" + movie.id} key={index}>
                         <div key={movie.id} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                             <Image
                                 src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${movie.poster_path}`}

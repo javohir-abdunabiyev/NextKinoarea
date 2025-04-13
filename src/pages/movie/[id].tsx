@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import MovieActors from "@/components/custom/actors";
 import Footer from "@/components/custom/footer";
+import MoviePosters from "@/components/custom/moviePosters";
 
 const reducer = (state: any, action: any) => {
     switch (action.type) {
@@ -125,6 +126,8 @@ function Movie() {
                     <h2 className="text-[40px] font-[900] text-white mb-[70px] mt-[50px]">В главных ролях:</h2>
                     <MovieActors id={state.movie.id} />
                 </div>
+                <h3 className="text-[40px] font-[900] text-white text-center mb-[50px]">Похожие фильмы</h3>
+                <MoviePosters id={state.movie.id} />
             </div>
             <Footer />
         </>

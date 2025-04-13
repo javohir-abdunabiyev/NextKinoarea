@@ -87,7 +87,7 @@ function PopularMovies() {
             </div>
             <div className="flex gap-[22px] justify-center">
                 {state.movies.slice(8, 12).map((movie: any, index: number) => (
-                    <Link href={"movie/" + movie.id}>
+                    <Link href={"movie/" + movie.id} key={index}>
                         <div key={index} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                             <Image
                                 src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${movie.poster_path}`}

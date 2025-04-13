@@ -13,7 +13,7 @@ const reducer = (state: any, action: any) => {
 
 function Genres() {
     const [state, dispatch] = useReducer(reducer, [])
-    const [reload, setReload] = useContext(ReloadCTX)
+    const [reload] = useContext(ReloadCTX)
     useEffect(() => {
         const getTMDBApi = async () => {
             try {

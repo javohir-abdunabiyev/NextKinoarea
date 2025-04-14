@@ -1,20 +1,36 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["image.tmdb.org"],
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.module.rules.push({
-        test: /\.css$/i,
-        include: /[\\/]src[\\/]components[\\/]custom[\\/]/,
-        use: ['ignore-loader']
-      });
-    }
+  webpack: (config: any) => {
+    config.module.rules.push({
+      test: /\.css$/i,
+      include: /node_modules\/swiper/,
+      use: ['style-loader', 'css-loader']
+    });
+
+    config.module.rules.push({
+      test: /\.css$/i,
+      exclude: /node_modules/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            url: false,
+            modules: {
+              auto: true,
+              localIdentName: '[local]__[hash:base64:5]'
+            }
+          }
+        }
+      ]
+    });
+
     return config;
   }
 };
 
-export default nextConfig;
+module.exports = nextConfig;

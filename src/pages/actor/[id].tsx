@@ -63,14 +63,12 @@ function Actor() {
         getTMDBApi();
     }, [reload, params?.id]);
 
-    // Получаем массив ID фильмов
     const movieIds = state.movies.map((movie: any) => movie.id);
 
     return (
         <>
             {state.actor && (
                 <div className="flex flex-col items-center">
-                    {/* Информация об актере */}
                     <div className="flex justify-center gap-[50px] w-full max-w-6xl mb-10">
                         <Image
                             src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${state.actor.profile_path}`}
@@ -87,7 +85,6 @@ function Actor() {
                         </div>
                     </div>
 
-                    {/* Галерея фото */}
                     {state.images.length > 0 && (
                         <div className="w-full max-w-6xl">
                             <h4 className="text-[40px] font-[900] text-white mb-[10px]">Фото</h4>
@@ -109,7 +106,6 @@ function Actor() {
                 </div>
             )}
 
-            {/* Секция с фильмами - передаем массив ID один раз */}
             {state.movies.length > 0 && (
                 <div className="mt-10">
                     <h3 className="text-[40px] font-[900] text-white mb-[10px]">Фильмы</h3>

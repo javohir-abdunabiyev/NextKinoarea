@@ -2,10 +2,8 @@ import { ReloadCTX } from "@/contexts/reload";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useReducer, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
 const reducer = (state: any, action: any) => {
     switch (action.type) {
@@ -79,10 +77,7 @@ function UpComing() {
                     modules={[Navigation]}
                     spaceBetween={20}
                     slidesPerView={4}
-                    navigation={{
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    }}
+                    navigation
                     onSlideChange={(swiper) => {
                         setCurrentSlide(Math.floor(swiper.activeIndex / 4) + 1);
                     }}
@@ -99,8 +94,8 @@ function UpComing() {
                 >
                     {state.movies.map((movie: any, index: number) => (
                         <SwiperSlide key={movie.id}>
-                            <Link href={"/movie/" + movie.id} key={index}>
-                                <div key={index} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                            <Link href={"movie/" + movie.id}>
+                                <div className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                                     <Image
                                         src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${movie.poster_path}`}
                                         alt="movie"
@@ -121,15 +116,11 @@ function UpComing() {
                 </Swiper>
             </div>
             <div className="relative flex justify-center items-center mt-4 gap-8">
-                <button className="absolute !left-[600px] bg-[] swiper-button-prev rounded-full p-2 w-10 h-10 flex items-center justify-center">
-                </button>
 
                 <span className="text-[rgba(242,246,15,1)] font-bold text-xl">
                     {Math.min(Math.round(currentSlide), totalSlides)}/{totalSlides}
                 </span>
 
-                <button className="absolute !right-[600px] bg-[] swiper-button-next rounded-full p-2 w-10 h-10 flex items-center justify-center">
-                </button>
             </div>
         </>
     );

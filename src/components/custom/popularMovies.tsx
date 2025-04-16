@@ -2,11 +2,8 @@ import { ReloadCTX } from "@/contexts/reload";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useReducer, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
 const reducer = (state: any, action: any) => {
     switch (action.type) {
@@ -25,7 +22,7 @@ function PopularMovies() {
         genres: [],
     });
     const [reload] = useContext(ReloadCTX);
-    const [selectedYear, setSelectedYear] = useState("all")
+    const [selectedYear, setSelectedYear] = useState("all");
     const swiperRef = useRef<any>(null);
     const [currentSlide, setCurrentSlide] = useState(1);
     const [totalSlides, setTotalSlides] = useState(0);
@@ -55,9 +52,6 @@ function PopularMovies() {
                 const moviesData = await moviesRes.json();
                 const genresData = await genresRes.json();
 
-                console.log(moviesData.results);
-
-
                 dispatch({ type: "setMovies", payload: moviesData.results });
                 dispatch({ type: "setGenres", payload: genresData.genres });
                 setTotalSlides(Math.ceil((moviesData.results?.length || 0) / 4));
@@ -76,7 +70,6 @@ function PopularMovies() {
             .join(", ");
     };
 
-
     return (
         <>
             <div className="flex items-center gap-[90px] mb-[50px] mt-[100px]">
@@ -94,15 +87,13 @@ function PopularMovies() {
                     ))}
                 </div>
             </div>
+
             <div className="flex gap-[22px] justify-center">
                 <Swiper
                     modules={[Navigation]}
                     spaceBetween={20}
                     slidesPerView={4}
-                    navigation={{
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    }}
+                    navigation
                     onSlideChange={(swiper) => {
                         setCurrentSlide(Math.floor(swiper.activeIndex / 4) + 1);
                     }}
@@ -119,8 +110,8 @@ function PopularMovies() {
                 >
                     {state.movies.map((movie: any, index: number) => (
                         <SwiperSlide key={movie.id}>
-                            <Link href={"movie/" + movie.id} key={index}>
-                                <div key={index} className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                            <Link href={"movie/" + movie.id}>
+                                <div className="fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                                     <Image
                                         src={process.env.NEXT_PUBLIC_BASE_IMG_URL + `${movie.poster_path}`}
                                         alt="movie"
@@ -140,16 +131,11 @@ function PopularMovies() {
                     ))}
                 </Swiper>
             </div>
-            <div className="relative flex justify-center items-center mt-4 gap-8">
-                <button className="absolute !left-[600px] bg-[] swiper-button-prev rounded-full p-2 w-10 h-10 flex items-center justify-center">
-                </button>
 
+            <div className="flex justify-center items-center mt-4 gap-8">
                 <span className="text-[rgba(242,246,15,1)] font-bold text-xl">
                     {Math.min(Math.round(currentSlide), totalSlides)}/{totalSlides}
                 </span>
-
-                <button className="absolute !right-[600px] bg-[] swiper-button-next rounded-full p-2 w-10 h-10 flex items-center justify-center">
-                </button>
             </div>
         </>
     );
